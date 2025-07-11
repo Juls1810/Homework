@@ -14,8 +14,8 @@ enter_value = browser.find_element(By.CSS_SELECTOR, "#password")
 enter_value.send_keys("SuperSecretPassword!")
 enter_value.send_keys(Keys.RETURN)
 
-
-display_text = browser.find_element(By.CSS_SELECTOR, "button.radius")
+(sleep(5))
+display_text = browser.find_element(By.CSS_SELECTOR, "#flash").text 
 
 print(display_text)
 
