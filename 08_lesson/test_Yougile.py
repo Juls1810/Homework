@@ -1,8 +1,8 @@
 import requests
 
 base_url = "https://ru.yougile.com"
-#получить список компаний
-def test_get_list_company(login = 'Ladi1993@mail.ru', password = '19932009q94374218'):
+
+def test_get_list_company(login = '', password = ''):
     creds = {
         'login': login,
         'password': password
@@ -14,8 +14,8 @@ def test_get_list_company(login = 'Ladi1993@mail.ru', password = '19932009q94374
 
 def test_auth():
     creds_2 = {
-        'login': 'Ladi1993@mail.ru',
-        'password': '19932009q94374218',
+        'login': '',
+        'password': '',
         'companyId': '1b457e57-9bda-4612-890d-789a8d7fc59c'
         }
     resp= requests.post(base_url + '/api-v2/auth/keys',json=creds_2)
