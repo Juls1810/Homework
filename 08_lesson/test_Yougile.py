@@ -1,10 +1,6 @@
 import requests
 
 base_url = "https://ru.yougile.com"
-id_company = "1b457e57-9bda-4612-890d-789a8d7fc59c"
-api_key = ""
-user_id = "a441852e-de85-4c7f-8731-2ede92ada79b"
-
 
 def test_create_new_project_poz():
     headers = {
