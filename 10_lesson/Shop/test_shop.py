@@ -4,17 +4,26 @@ from LoginPageShop import LoginPage
 from MainPageShop import MainPage
 from CartPageShop import CartPage
 from FinalPageShop import FinalPage
+import pytest
+
+
+@pytest.fixture
+def browser():
+    browser = webdriver.Firefox()
+    yield browser
+    browser.quit()
+
+
+
 
 @allure.title("Тестирование интернет магазина одежды")
 @allure.description("Тест проверяет возможность авторизации на сайте интернет магазина, добавление товара в корзину")
 @allure.feature("интернет магазин")
 @allure.severity(allure.severity_level.CRITICAL)
-def test_shop():
+def test_shop(browser):
     """
     Тест проверяет работу интернет магазина одежды. Авторизация на сайте
     """
-    with allure.step("Открытие браузера"):
-        browser = webdriver.Firefox()
 
     with allure.step("Обьявляем переменную"):
         log_page = LoginPage(browser)
@@ -43,8 +52,6 @@ def test_shop():
     with allure.step("Заполение формы заказа"):
         final_page.order_form()
 
-    with allure.step("Выводим финальную стоимость"):
+    with allure.step("Проверяем финальную стоимость"):
         final_page.final_page()
 
-    with allure.step("Закрываем браузер"):
-        final_page.close_driver()

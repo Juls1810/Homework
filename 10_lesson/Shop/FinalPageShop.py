@@ -19,19 +19,8 @@ class FinalPage:
         self._driver.find_element(By.CSS_SELECTOR, "#postal-code").send_keys("398027")
         self._driver.find_element(By.CSS_SELECTOR, "#continue").click()
 
-    @allure.step("Выводим финальную стоимость")
+    @allure.step("Проверяем финальную стоимость")
     def final_page(self):
-        total = self._driver.find_element(By.CLASS_NAME, "summary_total_label").text
-        # EC.text_to_be_present_in_element(By.CLASS_NAME, 'summary_total_label'), "Total: $58.29"
-        # print(total)
-
-        try:
-            total = WebDriverWait(10).until(
-                EC.presence_of_element_located(By.CLASS_NAME, 'summary_total_label').text
-            )
-        finally:
-            print(total)
-
-
-    def close_driver(self):
-        self._driver.quit()
+        total = WebDriverWait(self._driver, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, 'summary_total_label'))).text
+        assert total.split("$")[1] =="58.29"
