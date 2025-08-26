@@ -1,7 +1,9 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
-from allure
+import allure
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 class FinalPage:
     """
@@ -20,9 +22,16 @@ class FinalPage:
     @allure.step("Выводим финальную стоимость")
     def final_page(self):
         total = self._driver.find_element(By.CLASS_NAME, "summary_total_label").text
-        EC.text_to_be_present_in_element(By.CLASS_NAME, 'summary_total_label'), "Total: $58.29"
-        print(total)
+        # EC.text_to_be_present_in_element(By.CLASS_NAME, 'summary_total_label'), "Total: $58.29"
+        # print(total)
 
-    @allure.step("Закрываем браузер")
+        try:
+            total = WebDriverWait(10).until(
+                EC.presence_of_element_located(By.CLASS_NAME, 'summary_total_label').text
+            )
+        finally:
+            print(total)
+
+
     def close_driver(self):
         self._driver.quit()

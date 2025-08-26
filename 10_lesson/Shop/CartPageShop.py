@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from allure
+import allure
 
 class CartPage:
     """
